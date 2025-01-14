@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CelestialQuest</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: rgb(12, 4, 107);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-top">
+        <!-- LOGO -->
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="logo"></a>
+        </div>
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="options">
+                <ul class="multi-options">
+                    <li class="nav-item"></li>
+                        <a href="index.html">Home</a>
+                    <li class="nav-item"></li>
+                        <a href="explore.html">Explore</a>
+                    <li class="nav-item"></li>
+                        <a href="cosmicImages.html">Cosmic Images</a>
+                    <li class="nav-item"></li>
+                        <a href="spaceMission.html">Space Missions</a>
+                    <!-- <li class="nav-item"></li>
+                        <a href="#">Resources</a> -->
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+    <main>
+        <div class="text-over-v">
+            VOYAGE BEYOND THE STARS...
+        </div>
+        <div class="main-video">
+            <video src="main-screen.mp4" width="100%" height="100%" autoplay loop muted></video>
+        </div>
+        <div class="quote">
+            " The cosmos is within us. We are made of star-stuff. " <br><br> - Carl Sagan
+        </div>
+        <div class="today-news">
+            <h1>ASTRONOMY PICTURE OF THE DAY</h1>
+            <div id="apod">
+              <h2 id="title"></h2>
+              <img id="image" alt="Astronomy Picture of the Day" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </main>
+
+    <script>
+        
+        async function fetchAPOD() {
+          const apiKey = 'IWiQ7PJQ92RWZevuFpHBAgkhonvfxcdpau7b5jcf'; 
+          const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+    
+          try {
+            const response = await fetch(url);
+            const data = await response.json();
+    
+            document.getElementById('title').textContent = data.title;
+            document.getElementById('image').src = data.url;
+    
+          } catch (error) {
+            console.error("Error fetching APOD:", error);
+            document.getElementById('apod').textContent = "Could not load Astronomy Picture of the Day.";
+          }
+        }
+    
+        fetchAPOD();
+    </script>
+</body>
+</html>

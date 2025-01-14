@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CelestialQuest</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: rgb(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+    <header class="header-top">
+        <!-- LOGO -->
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="logo"></a>
+        </div>
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="options">
+                <ul class="multi-options">
+                    <li class="nav-item"></li>
+                        <a href="index.html">Home</a>
+                    <li class="nav-item"></li>
+                        <a href="explore.html">Explore</a>
+                    <li class="nav-item"></li>
+                        <a href="cosmicImages.html">Cosmic Images</a>
+                    <li class="nav-item"></li>
+                        <a href="spaceMission.html">Space Missions</a>
+                    <!-- <li class="nav-item"></li>
+                        <a href="#">Resources</a> -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="text">   
+            <div class="top-line">
+                Deep space <br>through our lens 
+            </div>
+            <div class="facts">
+                The Andromeda Galaxy and the Milky Way are slowly moving toward each other and will collide in about 4.5 billion years. <br> <br>When they merge, the two galaxies will form a new, larger galaxy, likely altering the shape and arrangement of our solar system.
+            </div>
+        </div>
+        <div class="p-images">
+            <div class="img1">
+                <img src="image1.jpg" alt="image1">
+            </div>
+            <div class="img2">
+                <img src="image2.jpg" alt="image2">
+            </div>
+            <div class="img3">
+                <img src="image3.jpg" alt="image3">
+            </div>
+            <div class="img4">
+                <img src="image4.jpg" alt="image4">
+            </div>
+            <div class="img6">
+                <img src="image6.jpg" alt="image6">
+            </div>
+        </div>
+
+        <div class="mars-container-top"> 
+            <div class="mars-text">
+                <div class="mars-heading">
+                    <div class="first">
+                        MARS
+                    </div> HOVER
+                </div>
+                <div class="mars-d">
+                    NASA's Perseverance rover is collecting <u><b>MARTIAN SOIL</b></u> samples to be returned to Earth, potentially <u>the first extraterrestrial samples</u> ever brought back for analysis!
+                </div>
+            </div>
+            <div class="mars-rover-i">
+                <img src="mars-rover-c.jpg" alt="mars-rover-image">
+            </div>
+        </div>
+        <div class="mars-container-img">
+            <div class="title">
+                PHOTOS TAKEN BY ROVER
+            </div>
+            <div class="btns">
+                <button id="fhaz-button">FHAZ Camera</button>
+                <button id="mast-button">MAST Camera</button>
+                <button id="chemcam-button">CHEMCAM Camera</button>
+                <div id="photos-container"></div>
+            </div> 
+    </main>
+</div>
+    <footer class="footer">
+        <div class="footer-text">
+            From code to cosmos - <br> adventure awaits!
+        </div>
+        <div class="footer-img">
+            <img src="footer-img.jpg" alt="Image">
+        </div>
+        <div class="links">
+            <a href="https://github.com/Shreyashahu"><img class="i1" src="github.png" alt="github"></a>
+            <a href="https://www.linkedin.com/in/shreyashahu/"><img class="i2" src="linkedin.png" alt="linkedin"></a>
+        </div>
+
+
+
+    </footer>
+
+
+
+
+
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const API_KEY = 'IWiQ7PJQ92RWZevuFpHBAgkhonvfxcdpau7b5jcf';  // Replace with your actual NASA API key
+        const rover = 'curiosity';  // You can change this to 'opportunity' or 'spirit'
+        const sol = 1000;  // Martian Sol, change as per your needs
+        const requiredPhotosCount = 5;  // Number of photos we need to display
+        let currentCamera = 'fhaz';  // Default camera
+        let photos = [];  // Array to store the photos
+
+        async function fetchMarsRoverPhotos(page) {
+            const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&camera=${currentCamera}&page=${page}&api_key=${API_KEY}`;
+        
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+            const data = await response.json();
+            
+            if (data.photos && data.photos.length > 0) {
+                photos = data.photos.slice(0, requiredPhotosCount);  // Limit the number of photos
+                displayPhotos(photos);
+            } else {
+                document.getElementById("photos-container").innerHTML = `<p>No photos found for this camera.</p>`;
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            document.getElementById("photos-container").innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+            }
+        }
+
+        function displayPhotos(photos) {
+            const container = document.getElementById('photos-container');
+            container.innerHTML = '';  // Clear previous images
+
+        photos.forEach(photo => {
+            const photoDiv = document.createElement('div');
+            photoDiv.style.margin = '20px';
+            const img = document.createElement('img');
+            img.src = photo.img_src;
+            img.alt = `Mars Rover Photo ID ${photo.id}`;
+            img.style.width = '200px';
+
+            const details = document.createElement('p');
+            details.innerHTML = ` 
+                <strong>Photo ID:</strong> ${photo.id} <br>
+                <strong>Earth Date:</strong> ${photo.earth_date} <br>
+                <strong>Camera:</strong> ${photo.camera.full_name}
+            `;
+
+            photoDiv.appendChild(img);
+            photoDiv.appendChild(details);
+            container.appendChild(photoDiv);
+            });
+        }
+
+        function changeCamera(camera) {
+            currentCamera = camera;
+            photos = [];  // Clear previous photos
+            fetchMarsRoverPhotos(1);  // Load photos for the new camera
+        }
+
+        // Button event listeners
+        document.getElementById("fhaz-button").addEventListener('click', function() {
+            changeCamera('fhaz');
+        });
+
+        document.getElementById("mast-button").addEventListener('click', function() {
+            changeCamera('mast');
+        });
+
+        document.getElementById("chemcam-button").addEventListener('click', function() {
+            changeCamera('chemcam');
+        });
+
+        // Load the first set of photos for the default camera
+        fetchMarsRoverPhotos(1);
+        });
+    </script>
+</body>
+</html>
