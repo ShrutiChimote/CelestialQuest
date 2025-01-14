@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Rover Photos</title>
+</head>
+<body>
+    <h1>Mars Rover Photos</h1>
+    
+    <!-- Buttons for camera selection -->
+    <button id="fhaz-button">FHAZ Camera</button>
+    <button id="mast-button">Mast Camera</button>
+    <button id="chemcam-button">ChemCam Camera</button>
+    
+    <div id="photos-container">
+        <!-- Photos will be appended here dynamically -->
+    </div>
+
+    <button id="load-more">Load More Photos</button>
+
+    <script>
+        const API_KEY = 'IWiQ7PJQ92RWZevuFpHBAgkhonvfxcdpau7b5jcf';  // Replace with your actual NASA API key
+        const rover = 'curiosity';  // You can change this to 'opportunity' or 'spirit'
+        const sol = 1000;  // Martian Sol, change as per your needs
+        let currentPage = 1;  // Start from page 1
+        let photos = [];  // Array to store the photos
+        const requiredPhotosCount = 10;  // Number of photos we need to display
+        let currentCamera = 'fhaz';  // Default camera
+
+        // Function to fetch photos from the NASA API based on the current camera
+        async function fetchMarsRoverPhotos(page) {
+            const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&camera=${currentCamera}&page=${page}&api_key=${API_KEY}`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+                const data = await response.json();
+                
+                if (data.photos && data.photos.length > 0) {
+                    photos = [...photos, ...data.photos];  // Add the photos to the array
+                    displayPhotos(photos);
+                    // If we have enough photos, disable the "Load More" button
+                    if (photos.length >= requiredPhotosCount) {
+                        document.getElementById("load-more").disabled = true;
+                    }
+                } else {
+                    document.getElementById("load-more").disabled = true;  // Disable if no more photos
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                document.getElementById("photos-container").innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+            }
+        }
+
+        // Function to display photos
+        function displayPhotos(photos) {
+            const container = document.getElementById('photos-container');
+            // Clear the container before appending new photos
+            container.innerHTML = '';
+            photos.slice(0, requiredPhotosCount).forEach(photo => {
+                // Create elements for each photo and its details
+                const photoDiv = document.createElement('div');
+                photoDiv.style.margin = '20px';
+                
+                const img = document.createElement('img');
+                img.src = photo.img_src;
+                img.alt = `Mars Rover Photo ID ${photo.id}`;
+                img.style.width = '200px';
+
+                const details = document.createElement('p');
+                details.innerHTML = ` 
+                    <strong>Photo ID:</strong> ${photo.id} <br>
+                    <strong>Earth Date:</strong> ${photo.earth_date} <br>
+                    <strong>Camera:</strong> ${photo.camera.full_name}
+                `;
+
+                photoDiv.appendChild(img);
+                photoDiv.appendChild(details);
+                container.appendChild(photoDiv);
+            });
+        }
+
+        // Function to change the camera based on button click
+        function changeCamera(camera) {
+            currentCamera = camera;  // Update the current camera
+            photos = [];  // Clear previous photos
+            currentPage = 1;  // Reset to the first page
+            document.getElementById("load-more").disabled = false;  // Enable "Load More" button
+            fetchMarsRoverPhotos(currentPage);  // Fetch photos for the new camera
+        }
+
+        // Event listeners for camera buttons
+        document.getElementById("fhaz-button").addEventListener('click', function() {
+            changeCamera('fhaz');
+        });
+
+        document.getElementById("mast-button").addEventListener('click', function() {
+            changeCamera('mast');
+        });
+
+        document.getElementById("chemcam-button").addEventListener('click', function() {
+            changeCamera('chemcam');
+        });
+
+        // Load the first set of photos
+        fetchMarsRoverPhotos(currentPage);
+
+        // Event listener to load more photos on button click
+        document.getElementById("load-more").addEventListener('click', function() {
+            currentPage++;
+            fetchMarsRoverPhotos(currentPage);
+        });
+    </script>
+</body>
+</html>

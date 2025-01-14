@@ -1,0 +1,416 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    color: white;
+    overflow-x: hidden;
+    font-family: "Tilt Neon", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "XROT" 0,
+        "YROT" 0;
+}
+
+.main-video{
+    position: fixed;
+    top: 0;
+    z-index: -1;
+}
+
+.header-top .logo img{
+    height: auto;
+    width: 200px;
+}
+
+.header-top{
+    display: flex;
+    align-items: center;
+}
+
+.header-top .logo{
+    margin: 25px;
+}
+
+.navbar{
+    width: 1200px;
+    
+}
+
+.navbar a{
+    color: rgb(188, 188, 188);
+    font-size: 20px;
+    border: none;
+    padding-bottom: 2px;
+    
+}
+
+.navbar a:hover{
+    color: white;
+    transition: 0.5s ease;
+    border: 1px rgb(188, 188, 188) solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.navbar .multi-options{
+    display: flex;
+    align-items: center;
+}
+
+.navbar .nav-item{
+    display: flex;
+    align-items: center;
+    padding: 0px 60px;
+}
+
+.text-over-v{
+    margin: 50px 0px 0px 100px;
+    font-size: 50px;
+    letter-spacing: 10px;
+}
+
+.quote{
+    width: 550px;
+    margin: 325px 0px 0px 900px;
+    padding: 10px;
+    color: white;
+    border: 2px white solid;
+    border-top: none;
+    border-left: none;
+    letter-spacing: 3px;
+    text-align: right;
+}
+
+.today-news{
+    margin-top: 50px;
+    padding: 15px;
+    text-align: center;
+    background-color: black;
+}
+
+.today-news img{
+    height: auto;
+    width: 450px;
+    padding: 25px;
+    display: inline-flex;
+}
+
+.today-news h1{
+    font-size: 50px;
+    letter-spacing: 4px;
+}
+
+.today-news h2{
+    font-size: 40px;
+    border: 2px white;
+}
+
+
+/* EXPLORE */
+
+.page{
+    background-color: black;
+}
+
+.text{
+    display: flex;
+    align-items: center;
+}
+
+.top-line{
+    font-size: 45px;
+    margin: 45px 0px 0px 100px;
+    width: 575px;
+    height: auto;
+}
+
+.p-images{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 25px 35px;
+    padding: 5px 25px;
+}
+
+.p-images img{
+    margin-top: 15px;
+    height: 250px;
+    width: auto;
+}
+
+.p-images img:hover{
+    transition: 1s ease;
+    height: 350px;
+    width: auto; 
+}
+
+.facts{
+    margin: 45px 105px 0px 225px;
+    font-size: 20px;
+    text-align: justify;
+}
+
+#photos-container{
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+}
+
+
+.mars-section{
+    margin: 45px 0px 0px 35px;
+}
+
+
+h1{
+    font-size: 95px;
+    text-align: center;
+    letter-spacing: 5px;
+}
+
+.mars-container-top{
+    display: flex;
+    align-items: center;
+}
+
+.mars-text{
+    margin-top: 55px;
+    height: 500px;
+    width: 750px;
+    background-color: rgb(20, 20, 20);
+}
+
+.mars-text:hover{
+    background-color: black;
+    border: white 4px solid;
+    transition: 0.5s ease;
+}
+
+.mars-heading{
+    margin: 50px 0px 0px 90px;
+    width: 450px;
+    font-size: 85px;
+    letter-spacing: 15px;
+}
+
+.mars-heading .first{
+    letter-spacing: 35px;
+}
+
+.mars-d{
+    font-size: 20px;
+    margin: 120px 25px 30px 200px;
+    text-align: justify;
+}
+
+
+.mars-d u{
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+
+.mars-rover-i{
+    margin: 50px 30px 0px 30px;
+}
+
+.mars-rover-i img{
+    height: 350px;
+    width: auto;
+}
+
+.mars-container-img{
+    margin-top: 50px;
+}
+
+.mars-container-img .title{
+    text-align: center;
+    font-size: 115px;
+}
+
+.mars-container-img .btns button{
+    margin: 10px 25px;
+    padding: 8px;
+    background-color: white;
+    color: black;
+    border-radius: 8px;
+    width: 200px;
+    font-size: 20px;
+    border: 5px rgb(255, 145, 0) solid;
+}
+
+.mars-container-img .btns button:hover{
+    cursor: pointer;
+}
+
+.footer-img img{
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    height: 750px;
+    width: 100%;
+}
+
+.footer-text{
+    height: 250px;
+    margin: 120px 0px 0px 60px;
+    font-size: 45px;
+    letter-spacing: 5px;
+}
+
+.footer .links{
+    margin: 170px 0px 30px 1300px;
+}
+
+.footer .links img{
+    padding-right: 15px;
+    height: 60px;
+}
+
+
+/* COSMIC IMAGES */
+
+.images{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    background-color: black;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.column img {
+    width: 400px;
+    height: auto;
+    border: 4px white solid;
+}
+
+.column .a{
+    width: 350px;
+}
+
+.column .b{
+    width: 300px;
+    height: 225px;
+}
+
+.column .c{
+    width: 325px;
+    height: 425px;
+}
+
+.column .d{
+    width: 300px;
+    height: 200px;
+}
+
+.column .e{
+    width: 300px;
+}
+
+.column .f{
+    width: 350px;
+    height: 450px;
+}
+
+.column .g{
+    width: 300px;
+}
+
+.column .h{
+    height: 225px;
+    width: 325px;
+}
+
+.column .i{
+    width: 350px;
+}
+
+.column .j{
+    height: 485px;
+    width: 300px;
+}
+
+.column .k{
+    width: 300px;
+    height: 275px;
+}
+
+.column .l{
+    height: 260px;
+    width: 325px;
+}
+
+.footer-text{
+    line-height: 65px;
+}
+
+
+/* SPACE MISSIONS */
+
+*{
+    margin: 0;
+}
+
+.main-page{
+    background-color: black;
+}
+
+.observatory-video{
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 750px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.mission-text{
+    margin: 650px 0px 0px 50px;
+    background-color: black;
+    font-size: 45px;
+}
+
+.list-missions{
+    display: flex;
+    align-items: center;
+}
+
+.first-m{
+    color: black;
+    background-color: white;
+}
+
+.title-heading{
+    margin: 550px 0px 0px 100px;
+    padding: 15px;
+    font-size: 35px;
+    letter-spacing: 30px;
+    text-align: center;
+    background-color: black;
+}
+
+.left-heading{
+    font-size: 20px;
+    background-color: black;
+    font-size: 25px;
+    letter-spacing: 8px;
+    padding: 5px;
+}
+
+.left-img img{
+    height: auto;
+    width: 450px;
+}
+
+.left-m{
+    margin: 5px 0px 0px 100px;
+}
